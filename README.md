@@ -3,7 +3,7 @@ Deploying a basic S3 static website using terraform
 
 You can use Amazon S3 to host a static website. On a static website, individual webpages include static content. They might also contain client-side scripts.
 
-In this tutorial, the website will be accessed using S3 Bucket Endpoint which will have name of the bucket, we can hide it by creating a CNAME record in Route53.
+In this tutorial, the website will be accessed using S3 Bucket Endpoint which will have name of the bucket, we can hide it by creating a CNAME record in Route53 if you have a domain.
 
 We can either use bucket policy (used in majority of cases), but we can use bucket ownership controls and bucket/object ACLs to define more granularity. (Code is commented in main.tf, all objects also need to use acl="public-read")
 
