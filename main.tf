@@ -1,7 +1,7 @@
 ####################################################
 # S3 static website bucket
 ####################################################
-resource "aws_s3_bucket" "my-static-website" {
+resource "aws_s3_bucket" "static_website" {
   bucket = var.bucket_name
   tags = merge(local.common_tags, {
     Name = "${local.naming_prefix}-s3-bucket"
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "my-static-website" {
 # S3 public access settings
 ####################################################
 resource "aws_s3_bucket_public_access_block" "static_site_bucket_public_access" {
-  bucket = aws_s3_bucket.my-static-website.id
+  bucket = aws_s3_bucket.static_website.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -52,7 +52,7 @@ resource "aws_s3_bucket_policy" "static_site_bucket_policy" {
 # S3 bucket static website configuration
 ####################################################
 resource "aws_s3_bucket_website_configuration" "static_site_bucket_website_config" {
-  bucket = aws_s3_bucket.my-static-website.id
+  bucket = aws_s3_bucket.static_website.id
 
   index_document {
     suffix = "index.html"
@@ -67,7 +67,7 @@ resource "aws_s3_bucket_website_configuration" "static_site_bucket_website_confi
 # S3 bucket ownership controls and ACL (recommended if you want object level control).
 ####################################################
 resource "aws_s3_bucket_ownership_controls" "static_site_bucket_ownership_controls" {
-  bucket = aws_s3_bucket.my-static-website.id
+  bucket = aws_s3_bucket.my-static_website.id
   rule {
     object_ownership = "BucketOwnerPreferred"
   }
@@ -79,7 +79,7 @@ resource "aws_s3_bucket_acl" "static_site_bucket_acl" {
     aws_s3_bucket_public_access_block.static_site_bucket_public_access,
   ]
 
-  bucket = aws_s3_bucket.my-static-website.id
+  bucket = aws_s3_bucket.my-static_website.id
   acl    = "public-read"
 }
 */
@@ -88,7 +88,7 @@ resource "aws_s3_bucket_acl" "static_site_bucket_acl" {
 # Upload files to S3 Bucket 
 ####################################################
 resource "aws_s3_object" "provision_source_files" {
-  bucket = aws_s3_bucket.my-static-website.id
+  bucket = aws_s3_bucket.static_website.id
 
   # webfiles/ is the Directory contains files to be uploaded to S3
   for_each = fileset("webfiles/", "**/*.*")

@@ -1,31 +1,26 @@
 variable "aws_region" {
   type        = string
   description = "AWS region to use for resources."
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
-variable "bucket_name" {
-  type        = string
-  description = "Name of the S3 Bucket"
-  default     = "my-s3-static-bucket-v1"
-}
 
 variable "company" {
   type        = string
   description = "Company name for resource tagging"
-  default     = "CT"
+  default     = "emagetech"
 }
 
 variable "project" {
   type        = string
   description = "Project name for resource tagging"
-  default     = "Project"
+  default     = "project"
 }
 
 variable "naming_prefix" {
   type        = string
   description = "Naming prefix for all resources."
-  default     = "Demo"
+  default     = "demo"
 }
 
 variable "environment" {
@@ -34,6 +29,13 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "instance_key" {
-  default = "WorkshopKeyPair"
+variable "zone_id" {
+  type        = string
+  description = "Name of the domain"
+  default     = "Z06639414QTF8GXLZVRH"
+}
+variable "bucket_name" {
+  type        = string
+  description = "Name of the bucket."
+  default     = "solomon-website"
 }
